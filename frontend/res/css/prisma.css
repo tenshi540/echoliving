@@ -1,0 +1,111 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #AEC6CF;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo h1 {
+    margin-left: 0.5rem;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+nav a {
+    margin: 0 0.5rem;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #F4C2C2;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .menu {
+    display: flex;
+    gap: 1rem;
+}
+
+nav .account-link {
+    margin-left: auto;
+}
+
+.hero {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: #F4C2C2;
+    margin: 1rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.hero button {
+    background-color: #AEC6CF;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hero button:hover {
+    background-color: #87B9C9;
+}
+
+.product-list {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-card button {
+    background-color: #AEC6CF;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    background-color: #AEC6CF;
+    padding: 1rem;
+    margin-top: 2rem;
+}
