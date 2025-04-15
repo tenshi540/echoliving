@@ -1,38 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>Bewerbungsmatrix</title>
     <link rel="stylesheet" href="res/css/prisma.css">
-    <style>
-        table {
-            width: 90%;
-            margin: auto;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f7931e;
-            color: white;
-        }
-        td input[type='checkbox'] {
-            transform: scale(1.5);
-        }
-        .save-btn {
-            display: block;
-            margin: 20px auto;
-            background-color: #80bfa3;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -59,26 +30,13 @@
             <tr><td>AJAX genutzt</td><td><input type="checkbox"></td></tr>
             <tr><td>PHP integriert</td><td><input type="checkbox" checked></td></tr>
         </table>
+
         <button class="save-btn">Speichern</button>
     </div>
 
     <footer>
         <p>&copy; 2025 Echo Living. Alle Rechte vorbehalten.</p>
     </footer>
-
-<script>
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    const saved = localStorage.getItem("matrixSaved");
-
-    if (!saved) {
-        checkboxes.forEach(box => box.checked = false);
-    }
-
-    document.querySelector(".save-btn").addEventListener("click", () => {
-        localStorage.setItem("matrixSaved", "true");
-        alert("Status gespeichert.");
-    });
-</script>
 
 <script>
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -98,3 +56,4 @@
     });
 </script>
 </body>
+</html>
