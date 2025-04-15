@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Newsletter</title>
+    <link rel="stylesheet" href="res/css/prisma.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Newsletter abonnieren</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Startseite</a></li>
+                <li><a href="product.html">Produkte</a></li>
+                <li><a href="cart.html">Warenkorb</a></li>
+                <li><a href="Account.html">Account</a></li>
+                <li><a href="about.html">Über uns</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <form id="newsletterForm" style="max-width: 400px; margin: auto; display: flex; flex-direction: column; gap: 10px;">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">E-Mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <button type="submit" class="btn-checkin" style="background-color:#f7931e;">Abonnieren</button>
+            </form>
+            <div id="response" style="margin-top: 20px;"></div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Echo Living. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script>
+        $('#newsletterForm').on('submit', function(e) {
+            e.preventDefault();
+            const name = $('#name').val();
+            const email = $('#email').val();
+
+            $.ajax({
+                url: 'newsletter_response.php',
+                type: 'POST',
+                data: { name: name, email: email },
+                success: function(data) {
+                    $('#response').html('<p>' + data + '</p>');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Bewerbungsmatrix</title>
+    <link rel="stylesheet" href="res/css/prisma.css">
+    <style>
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f7931e;
+            color: white;
+        }
+        td input[type='checkbox'] {
+            transform: scale(1.5);
+        }
+        .save-btn {
+            display: block;
+            margin: 20px auto;
+            background-color: #80bfa3;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bewerbungskriterien</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Startseite</a></li>
+                <li><a href="product.html">Produkte</a></li>
+                <li><a href="cart.html">Warenkorb</a></li>
+                <li><a href="Account.html">Account</a></li>
+                <li><a href="about.html">Über uns</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <table>
+            <tr><th>Kriterium</th><th>Erfüllt</th></tr>
+            <tr><td>Responsive Design</td><td><input type="checkbox" checked></td></tr>
+            <tr><td>Farbschema angepasst</td><td><input type="checkbox" checked></td></tr>
+            <tr><td>Mind. 3 HTML Seiten</td><td><input type="checkbox" checked></td></tr>
+            <tr><td>CSS Separiert</td><td><input type="checkbox" checked></td></tr>
+            <tr><td>Formulare</td><td><input type="checkbox" checked></td></tr>
+            <tr><td>AJAX genutzt</td><td><input type="checkbox"></td></tr>
+            <tr><td>PHP integriert</td><td><input type="checkbox" checked></td></tr>
+        </table>
+        <button class="save-btn">Speichern</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Echo Living. Alle Rechte vorbehalten.</p>
+    </footer>
+
+<script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const saved = localStorage.getItem("matrixSaved");
+
+    if (!saved) {
+        checkboxes.forEach(box => box.checked = false);
+    }
+
+    document.querySelector(".save-btn").addEventListener("click", () => {
+        localStorage.setItem("matrixSaved", "true");
+        alert("Status gespeichert.");
+    });
+</script>
+
+<script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    // Load saved state
+    checkboxes.forEach((checkbox, index) => {
+        const saved = localStorage.getItem('bewerbung_check_' + index);
+        checkbox.checked = saved === 'true';
+    });
+
+    // Save state on click
+    document.querySelector('.save-btn').addEventListener('click', () => {
+        checkboxes.forEach((checkbox, index) => {
+            localStorage.setItem('bewerbung_check_' + index, checkbox.checked);
+        });
+        alert('Status gespeichert.');
+    });
+</script>
+</body>

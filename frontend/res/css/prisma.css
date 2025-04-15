@@ -1,111 +1,99 @@
+
+/* General styles */
 body {
-    font-family: 'Quicksand', sans-serif;
-    background-color: #ffffff;
-    color: #333;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
 header {
-    background-color: #AEC6CF;
-    padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #80bfa3;
+    color: white;
+    text-align: center;
+    padding: 20px;
 }
 
-header .logo {
+nav ul {
+    list-style: none;
+    padding: 0;
     display: flex;
-    align-items: center;
+    justify-content: center;
+    gap: 15px;
 }
 
-header .logo h1 {
-    margin-left: 0.5rem;
-    font-size: 1.5rem;
-    color: #333;
+nav ul li {
+    display: inline;
 }
 
 nav a {
-    margin: 0 0.5rem;
+    color: white;
     text-decoration: none;
-    color: #333;
     font-weight: bold;
 }
 
-nav a:hover {
-    color: #F4C2C2;
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
 }
 
-nav .menu {
-    display: flex;
-    gap: 1rem;
-}
-
-nav .account-link {
-    margin-left: auto;
-}
-
+/* index.html style */
 .hero {
     text-align: center;
-    padding: 2rem 1rem;
-    background-color: #F4C2C2;
-    margin: 1rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
 }
 
+.hero img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
 
-.hero button {
-    background-color: #AEC6CF;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
+.hero h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #444;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        padding: 10px;
+    }
+}
+
+/* Extra spacing and secondary color */
+
+nav ul li {
+    margin: 0 15px;
+}
+
+.btn-checkin {
+    background-color: #f0b37e;
     color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.hero button:hover {
-    background-color: #87B9C9;
-}
-
-.product-list {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 2rem;
-}
-
-.product-card {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-    text-align: center;
-    transition: transform 0.2s;
-}
-
-.product-card:hover {
-    transform: scale(1.05);
-}
-
-.product-card button {
-    background-color: #AEC6CF;
+    padding: 10px 15px;
     border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 8px;
-    color: white;
+    border-radius: 5px;
+    margin-top: 20px;
     cursor: pointer;
-}
-
-footer {
-    text-align: center;
-    background-color: #AEC6CF;
-    padding: 1rem;
-    margin-top: 2rem;
 }
