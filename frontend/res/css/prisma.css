@@ -74,12 +74,14 @@ nav a:hover {
 
 .hero {
     text-align: center;
-    padding: 2rem 1rem;
-    background-color: #ffe0ed; /* pastel pink background */
-    margin: 1rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem 1rem; /* thinner vertically */
+    background-color: #ffffff; /* white background */
+    margin: 0; /* full width (no margin) */
+    border-radius: 0; /* no rounded corners */
+    border: 1px solid #eee; /* light gray border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* keep existing smooth shadow */
 }
+
 
 .hero button {
     background-color: #dceefd; /* pastel blue button */

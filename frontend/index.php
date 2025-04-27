@@ -14,7 +14,6 @@
         <section class="hero">
             <h2>Welcome to EchoLiving</h2>
             <p>Discover beautiful products that make life better.</p>
-            <button>Shop Now</button>
         </section>
         <section class="product-list">
             <div class="product-card">
