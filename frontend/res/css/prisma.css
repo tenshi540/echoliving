@@ -132,3 +132,61 @@ footer {
     padding: 0.5rem;
     font-size: 0.8rem;
 }
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* force a minimum width */
+    gap: 3rem; /* <<< Bigger spacing between the cards */
+    padding: 4rem; /* more padding around the whole grid */
+    justify-items: center;
+}
+
+.product-card {
+    background: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1rem;
+    max-width: 280px; /* matches minmax width */
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+}
+
+.product-card h3 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.product-card p {
+    margin: 0.4rem 0;
+    font-size: 0.9rem;
+}
+
+.product-card button {
+    margin-top: 0.75rem;
+    background-color: #a7c7dc;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.product-card button:hover {
+    background-color: #8db3c7;
+}

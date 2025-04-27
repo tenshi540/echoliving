@@ -1,6 +1,6 @@
 <header>
     <div class="logo">
-        <img src="/res/img/logo.png" alt="EchoLiving" style="height: 40px;">
+        <img src="/echoliving/frontend/res/img/logo.png" alt="EchoLiving" style="height: 40px;">
     </div>
     <nav>
     <a href="/echoliving/frontend/index.php">Home</a>
