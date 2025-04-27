@@ -6,21 +6,10 @@
     <title>EchoLiving Webshop</title>
     <link rel="stylesheet" href="res/css/prisma.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
-
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="res/img/logo.png" alt="EchoLiving">
-            <h1>EchoLiving Webshop</h1>
-        </div>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">Products</a>
-            <a href="#">Cart</a>
-            <a href="#">Account</a>
-        </nav>
-    </header>
+    <?php include('compass.php'); ?>
+
     <main>
         <section class="hero">
             <h2>Welcome to EchoLiving</h2>
@@ -42,8 +31,8 @@
             </div>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2025 EchoLiving. All rights reserved.</p>
-    </footer>
+
+    <?php include('omega.php'); ?>
+    <script src="res/js/tenz.js"></script>
 </body>
 </html>

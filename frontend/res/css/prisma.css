@@ -1,16 +1,48 @@
 body {
     font-family: 'Quicksand', sans-serif;
-    background-color: #ffffff;
+    background-color: #fdfdfd; /* Whiter background */
     color: #333;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #AEC6CF;
-    padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #dceefd;
+    padding: 0.2rem 0.5rem; /* smaller padding */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 35px; /* even thinner height */
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    font-size: 0.9rem; /* smaller font */
 }
+
+footer {
+    background-color: #dceefd;
+    text-align: center;
+    padding: 0.2rem;
+    font-size: 0.6rem; /* smaller footer text */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 25px; /* even thinner footer */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+main {
+    padding-top: 50px; /* match new header size + little space */
+    padding-bottom: 40px; /* match new footer size + little space */
+}
+
+
 
 header .logo {
     display: flex;
@@ -23,6 +55,12 @@ header .logo h1 {
     color: #333;
 }
 
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 nav a {
     margin: 0 0.5rem;
     text-decoration: none;
@@ -31,47 +69,31 @@ nav a {
 }
 
 nav a:hover {
-    color: #F4C2C2;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav .menu {
-    display: flex;
-    gap: 1rem;
-}
-
-nav .account-link {
-    margin-left: auto;
+    color: #ffe0ed; /* pastel light pink on hover */
 }
 
 .hero {
     text-align: center;
     padding: 2rem 1rem;
-    background-color: #F4C2C2;
+    background-color: #ffe0ed; /* pastel pink background */
     margin: 1rem;
     border-radius: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
 .hero button {
-    background-color: #AEC6CF;
+    background-color: #dceefd; /* pastel blue button */
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 8px;
-    color: white;
+    color: #333;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .hero button:hover {
-    background-color: #87B9C9;
+    background-color: #c5e1f5;
 }
 
 .product-list {
@@ -82,9 +104,9 @@ nav .account-link {
 }
 
 .product-card {
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     padding: 1rem;
     text-align: center;
     transition: transform 0.2s;
@@ -95,17 +117,16 @@ nav .account-link {
 }
 
 .product-card button {
-    background-color: #AEC6CF;
+    background-color: #dceefd;
     border: none;
     padding: 0.4rem 0.8rem;
     border-radius: 8px;
-    color: white;
+    color: #333;
     cursor: pointer;
 }
 
 footer {
     text-align: center;
-    background-color: #AEC6CF;
-    padding: 1rem;
-    margin-top: 2rem;
+    padding: 0.5rem;
+    font-size: 0.8rem;
 }
