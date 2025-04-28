@@ -1,4 +1,7 @@
-<!-- Echoliving/frontend/index.html -->
+<?php
+?>            
+
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -12,17 +15,17 @@
         <h1>Echo Living</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Startseite</a></li>
-                <li><a href="product.html">Produkte</a></li>
-                <li><a href="cart.html">Warenkorb</a></li>
-                <li><a href="Account.html">Konto</a></li>
-                <li><a href="about.html">Über uns</a></li>
+            <li><a href="index.php">Startseite</a></li>
+                <li><a href="product.php">Produkte</a></li>
+                <li><a href="cart.php">Warenkorb</a></li>
+                <li><a href="Account.php">Konto</a></li>
+                <li><a href="about.php">Über uns</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Info Button oben rechts -->
-    <a href="bewerbungsmatrix.html" class="info-button" title="Zur Bewerbungsmatrix">i</a>
+    <a href="bewerbungsmatrix.php" class="info-button" title="Zur Bewerbungsmatrix">i</a>
 
     <div class="container text-center">
         <section class="hero">
@@ -32,8 +35,10 @@
         </section>
     </div>
 
-    <footer class="text-center mt-4">
-        <p>&copy; 2025 Echo Living. Alle Rechte vorbehalten.</p>
-    </footer>
+   
+    <?php include('footer.php'); ?>
 </body>
 </html>
+
+<?php
+?>

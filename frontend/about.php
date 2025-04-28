@@ -1,4 +1,5 @@
-
+<?php
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +12,11 @@
         <h1>Echo Living</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Startseite</a></li>
-                <li><a href="product.html">Produkte</a></li>
-                <li><a href="cart.html">Warenkorb</a></li>
-                <li><a href="Account.html">Konto</a></li>
-                <li><a href="about.html">Über uns</a></li>
+                <li><a href="index.php">Startseite</a></li>
+                <li><a href="product.php">Produkte</a></li>
+                <li><a href="cart.php">Warenkorb</a></li>
+                <li><a href="Account.php">Konto</a></li>
+                <li><a href="about.php">Über uns</a></li>
             </ul>
         </nav>
     </header>
@@ -28,12 +29,12 @@
         </section>
     
 <div style="text-align:center; margin: 40px 0;">
-    <button onclick="window.location.href='feedback.html'" style="background-color:#f7931e; color:white; padding:10px 20px; border:none; border-radius:5px;">Feedback Geben</button>
+    <button onclick="window.location.href='feedback.php'" style="background-color:#f7931e; color:white; padding:10px 20px; border:none; border-radius:5px;">Feedback Geben</button>
 </div>
 
 
-    <footer>
-        <p>&copy; 2025 Echo Living. All rights reserved.</p>
-    </footer>
+<?php include('footer.php'); ?>
 </body>
 </html>
+<?php
+?>
