@@ -15,6 +15,11 @@
             <h2>Welcome to EchoLiving</h2>
             <p>Discover beautiful products that make life better.</p>
         </section>
+        <section>
+    <h2 class="product-showcase-heading">Our Best Picks</h2>
+    <p class="product-showcase-subheading">Carefully selected products designed to elevate your daily comfort and style.</p>
+</section>
+
         <section id="product-list" class="product-list">
     <!-- Dynamic products will go here -->
 </section>

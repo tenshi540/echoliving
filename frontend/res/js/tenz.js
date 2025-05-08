@@ -1,6 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
     const productList = document.getElementById("product-list");
 
+    let cart = JSON.parse(localStorage.getItem('cart')) || {};
+updateCartCount();
+
+function updateCartCount() {
+    const cartCount = Object.values(cart).reduce((a, b) => a + b, 0);
+    const cartIcon = document.getElementById("cart-count");
+    if (cartIcon) {
+        cartIcon.textContent = cartCount;
+        cartIcon.classList.add("bump");
+        setTimeout(() => cartIcon.classList.remove("bump"), 300);
+    }
+}
+
+
     fetch("/echoliving/backend/logic/loadProducts.php")
         .then(response => response.json())
         .then(products => {
@@ -16,10 +30,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p>${product.description}</p>
                     <p>Rating: ${product.rating} ⭐</p>
                     <p><strong>€${parseFloat(product.price).toFixed(2)}</strong></p>
-                    <button>Add to Cart</button>
+                    <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
+
                 `;
 
                 productList.appendChild(productCard);
+                productCard.querySelector(".add-to-cart").addEventListener("click", (e) => {
+                    const id = e.target.getAttribute("data-id");
+                
+                    cart[id] = (cart[id] || 0) + 1;
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
+                });
+                
             });
         })
         .catch(error => {
