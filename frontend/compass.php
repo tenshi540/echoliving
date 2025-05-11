@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once __DIR__ . "/../backend/config/Database.php";
 use config\Database;
 $db = Database::getConnection();
