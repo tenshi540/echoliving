@@ -1,7 +1,12 @@
 <?php
+
+require_once __DIR__ . "/../config/Database.php";
+use config\Database;
+
 header('Content-Type: application/json');
 
-$mysqli = new mysqli("localhost", "root", "", "echo");
+$mysqli = Database::getConnection();
+
 
 if ($mysqli->connect_error) {
     http_response_code(500);

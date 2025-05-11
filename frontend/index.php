@@ -1,31 +1,39 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EchoLiving Webshop</title>
-    <link rel="stylesheet" href="res/css/prisma.css">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>EchoLiving</title>
+  <link rel="stylesheet" href="./res/css/prisma.css">
 </head>
 <body>
-    <?php include('compass.php'); ?>
+  <?php include 'compass.php'; ?>
 
-    <main>
-        <section class="hero">
-            <h2>Welcome to EchoLiving</h2>
-            <p>Discover beautiful products that make life better.</p>
-        </section>
-        <section>
-    <h2 class="product-showcase-heading">Our Best Picks</h2>
-    <p class="product-showcase-subheading">Carefully selected products designed to elevate your daily comfort and style.</p>
-</section>
+  <!-- Stacked hero panels -->
+  <section class="stacked-hero">
+    <div class="panel" style="background-image:url('res/img/landing1.jpg')">
+      <div class="overlay"></div>
+      <div class="text">
+        <h1>Design Meets Comfort</h1>
+        <p>Where form follows feeling.</p>
+      </div>
+    </div>
+    <div class="panel" style="background-image:url('res/img/landing2.jpeg')">
+      <div class="overlay"></div>
+      <div class="text">
+        <h1>Minimal. Modern. You.</h1>
+        <p>The art of less is more.</p>
+      </div>
+    </div>
+    <div class="panel" style="background-image:url('res/img/landing3.jpg')">
+      <div class="overlay"></div>
+      <div class="text">
+        <h1>Elevate Your Space</h1>
+        <p>Crafted for lasting elegance.</p>
+      </div>
+    </div>
+  </section>
 
-        <section id="product-list" class="product-list">
-    <!-- Dynamic products will go here -->
-</section>
-    </main>
-
-    <?php include('omega.php'); ?>
-    <script src="/echoliving/frontend/res/js/tenz.js"></script>
+  <?php include 'omega.php'; ?>
 </body>
 </html>

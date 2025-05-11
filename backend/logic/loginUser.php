@@ -1,9 +1,12 @@
 <?php
 header('Content-Type: application/json');
 session_start();
+require_once __DIR__ . "/../config/Database.php";
+use config\Database;
+
 
 // 1) connect (same as registerUser)
-$mysqli = new mysqli("localhost","root","","echo");
+$mysqli = Database::getConnection();
 if($mysqli->connect_error){
   echo json_encode(["success"=>false,"message"=>"DB connection failed"]);
   exit;
