@@ -357,3 +357,94 @@ footer {
 .cart-checkout:hover {
     background-color: #e0e0e0;
 }
+
+/* ─────── Login Page Styles (match Register) ─────── */
+.login-box {
+  background: #fff;
+  max-width: 380px;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 100px auto;
+}
+
+.login-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.login-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.login-form .form-group input,
+.login-form .form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.login-form button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #dceefd;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 1rem;
+}
+
+.login-form button[type="submit"]:hover {
+  background-color: #c5e1f5;
+}
+
+.login-form .login-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.login-form .login-footer a {
+  color: #6b5af3;
+  text-decoration: none;
+}
+
+.login-form .login-footer a:hover {
+  text-decoration: underline;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-username {
+  font-weight: 600;
+  color: white; /* or whatever your nav text color is */
+}
+
+.logout-link {
+  color: white;      /* match your other nav links */
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid white;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.logout-link:hover {
+  background: rgba(255,255,255,0.2);
+}
+
