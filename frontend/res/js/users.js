@@ -4,16 +4,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (regForm) {
     regForm.addEventListener("submit", async (e) => {
       e.preventDefault();
+      // Convert form to plain JS object
       const formData = new FormData(regForm);
-      // client-side password match check
       if (formData.get("password") !== formData.get("password_repeat")) {
         alert("Passwords do not match!");
         return;
       }
-      // send to backend
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value; });
       const res = await fetch("/echoliving/backend/logic/registerUser.php", {
         method: "POST",
-        body: formData
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
       });
       const json = await res.json();
       if (json.success) {
@@ -31,9 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData(loginForm);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value; });
       const res = await fetch("/echoliving/backend/logic/loginUser.php", {
         method: "POST",
-        body: formData
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
       });
       const json = await res.json();
       if (json.success) {

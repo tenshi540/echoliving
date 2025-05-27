@@ -10,10 +10,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  // 2) Fetch items for this user
+  // 2) Fetch items for this user (send JSON)
   let data;
   try {
-    const res = await fetch(`/echoliving/backend/logic/fetchUserOrders.php?userId=${userId}`);
+    const res = await fetch('/echoliving/backend/logic/fetchUserOrders.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId })
+    });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     data = await res.json();
   } catch (err) {
@@ -61,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     `;
   }
 
-  // 4) Hook delete buttons
+  // 4) Hook delete buttons (send JSON)
   itemsEl.addEventListener('click', async e => {
     if (!e.target.matches('.delete-item-btn')) return;
     const row    = e.target.closest('tr');
@@ -69,11 +73,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!confirm(`Delete item #${itemId}?`)) return;
 
     try {
-      const form = new FormData();
-      form.append('item_id', itemId);
-      const res  = await fetch('/echoliving/backend/logic/deleteOrderItem.php', {
+      const res = await fetch('/echoliving/backend/logic/deleteOrderItem.php', {
         method: 'POST',
-        body: form
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ item_id: itemId })
       });
       const json = await res.json();
       if (json.success) {

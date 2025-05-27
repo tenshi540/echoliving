@@ -1,40 +1,35 @@
 <?php
-// deleteProduct.php
-header('Content-Type: application/json; charset=UTF-8');
-// no HTML or whitespace before this
-
-session_start();
-// 1) Check auth + admin
-if (empty($_SESSION['user_id']) || empty($_SESSION['is_admin'])) {
-    http_response_code(403);
-    echo json_encode(['success'=>false,'message'=>'Forbidden']);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    header('Content-Type: application/json');
+    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
     exit;
 }
 
-// 2) Get & validate payload
-if (empty($_POST['id']) || !ctype_digit((string)$_POST['id'])) {
-    echo json_encode(['success'=>false,'message'=>'Invalid ID']);
+header('Content-Type: application/json');
+
+// Parse raw JSON input
+$data = json_decode(file_get_contents('php://input'), true);
+
+if (!isset($data['id'])) {
+    echo json_encode(['success' => false, 'message' => 'Product ID is required']);
     exit;
 }
-$id = (int)$_POST['id'];
+
+$id = intval($data['id']);
 
 require_once __DIR__ . '/../config/Database.php';
 use config\Database;
-
 $db = (new Database())->getConnection();
 
-// 3) Delete any dependent rows (order_items)
-$stmt = $db->prepare("DELETE FROM order_items WHERE product_id = ?");
-$stmt->bind_param('i', $id);
-$stmt->execute();
-$stmt->close();
-
-// 4) Delete the product
 $stmt = $db->prepare("DELETE FROM products WHERE id = ?");
 $stmt->bind_param('i', $id);
-$ok = $stmt->execute();
-$stmt->close();
 
-// 5) Return JSON only
-echo json_encode(['success' => (bool)$ok]);
-exit;
+if ($stmt->execute()) {
+    echo json_encode(['success' => true]);
+} else {
+    echo json_encode(['success' => false, 'message' => 'Failed to delete product']);
+}
+$stmt->close();
+$db->close();
+?>

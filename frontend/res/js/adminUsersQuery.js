@@ -1,8 +1,8 @@
-// /echoliving/frontend/res/js/adminUsersQuery.js
+// adminUsersQuery.js
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('users-container');
-  const ENDPOINT = '/echoliving/backend/logic/fetchAdminUsersData.php';
-  const TOGGLE   = '/echoliving/backend/logic/toggleUser.php';
+  const ENDPOINT  = '/echoliving/backend/logic/fetchAdminUsersData.php';
+  const TOGGLE    = '/echoliving/backend/logic/toggleUser.php';
 
   async function loadUsers() {
     try {
@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // build table rows, correctly interpreting is_active
       const rows = users.map(u => {
         const active = Number(u.active) === 1;
         return `
@@ -30,6 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>
               <button class="toggle-btn">
                 ${active ? 'Deactivate' : 'Activate'}
+              </button>
+              <button class="view-orders-btn" style="background:#27ae60;color:#fff;border:none;padding:0.3rem 0.6rem;border-radius:4px;cursor:pointer;">
+                View Orders
               </button>
             </td>
           </tr>
@@ -54,25 +56,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   container.addEventListener('click', async e => {
-    if (!e.target.matches('.toggle-btn')) return;
-    const row    = e.target.closest('tr');
-    const id     = row.dataset.id;
-    const text   = e.target.textContent.toLowerCase();
-    if (!confirm(`${text} user #${id}?`)) return;
+    const row = e.target.closest('tr');
+    const id = row?.dataset.id;
 
-    try {
-      const fd  = new FormData();
-      fd.append('id', id);
-      const res = await fetch(TOGGLE, {
-        method: 'POST',
-        credentials: 'include',
-        body: fd
-      });
-      const json = await res.json();
-      if (!json.success) throw new Error(json.message || 'Unknown error');
-      await loadUsers();
-    } catch (err) {
-      alert('Error toggling user: ' + err.message);
+    // Activate/Deactivate (unchanged)
+    if (e.target.matches('.toggle-btn')) {
+      const action = e.target.textContent.toLowerCase();
+      if (!confirm(`${action} user #${id}?`)) return;
+
+      try {
+        const res = await fetch(TOGGLE, {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id })
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        if (!json.success) throw new Error(json.message || 'Unknown error');
+        await loadUsers();
+      } catch (err) {
+        alert('Error toggling user: ' + err.message);
+      }
+    }
+
+    // View Orders Button
+    if (e.target.matches('.view-orders-btn')) {
+      // Open the orders page for this user
+      window.location.href = `admin_user_orders.php?user_id=${id}`;
     }
   });
 

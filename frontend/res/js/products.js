@@ -50,11 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
         card.className = "product-card";
         card.innerHTML = `
           <img
-  src="/echoliving/frontend/res/img/${p.image_filename}"
-  alt="${p.name}"
-  class="product-img"
-/>
-
+            src="/echoliving/frontend/res/img/${p.image_filename}"
+            alt="${p.name}"
+            class="product-img"
+          />
           <h3>${p.name}</h3>
           <p>${p.description}</p>
           <p>Rating: ${p.rating} ⭐</p>
@@ -81,20 +80,35 @@ document.addEventListener("DOMContentLoaded", () => {
       container.innerHTML = "<p>Failed to load products.</p>";
     });
 
-  // Live search handler
-  searchInput.addEventListener("input", e => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      const term = e.target.value.trim();
-      const url = "/echoliving/backend/logic/searchProducts.php?q=" + encodeURIComponent(term);
-      fetch(url)
+  // Live search handler (strict JSON, POST only)
+searchInput.addEventListener("input", e => {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    const term = e.target.value.trim();
+    if (term === "") {
+      // If search bar is empty, reload all products
+      fetch("/echoliving/backend/logic/loadProducts.php")
+        .then(r => r.json())
+        .then(renderProducts)
+        .catch(err => {
+          console.error("Error loading products:", err);
+          container.innerHTML = "<p>Failed to load products.</p>";
+        });
+    } else {
+      fetch("/echoliving/backend/logic/searchProducts.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ q: term })
+      })
         .then(r => r.json())
         .then(renderProducts)
         .catch(err => {
           console.error("Search error:", err);
         });
-    }, 300);
-  });
+    }
+  }, 300);
+});
+
 
   // Event delegation for Add-to-Cart and collapse/expand
   container.addEventListener("click", e => {

@@ -1,26 +1,27 @@
 <?php
-
-require_once __DIR__ . "/../config/Database.php";
-use config\Database;
-
 header('Content-Type: application/json');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-$mysqli = Database::getConnection();
-
-
-if ($mysqli->connect_error) {
-    http_response_code(500);
-    echo json_encode(["error" => "Database connection failed"]);
-    exit();
+// Enforce GET method
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405);
+    echo json_encode(['error' => 'Only GET allowed.']);
+    exit;
 }
 
-$result = $mysqli->query("SELECT * FROM products");
+require_once __DIR__ . '/../config/Database.php';
+use config\Database;
+$db = (new Database())->getConnection();
 
+$res = $db->query("SELECT * FROM products ORDER BY name ASC");
 $products = [];
-
-while ($row = $result->fetch_assoc()) {
+while ($row = $res->fetch_assoc()) {
     $products[] = $row;
 }
 
 echo json_encode($products);
+
+$db->close();
 ?>

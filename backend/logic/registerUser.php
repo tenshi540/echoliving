@@ -1,70 +1,64 @@
 <?php
-// registerUser.php
-header('Content-Type: application/json; charset=UTF-8');
-session_start();
+header('Content-Type: application/json');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['success' => false, 'message' => 'Only POST allowed']);
+    exit;
+}
+
+$data = json_decode(file_get_contents('php://input'), true);
+if (!$data) {
+    echo json_encode(['success' => false, 'message' => 'Invalid input']);
+    exit;
+}
+
+// Update these fields as needed!
+$required = ['salutation', 'first_name', 'last_name', 'address', 'postal_code', 'city', 'email', 'username', 'password', 'password_repeat'];
+foreach ($required as $field) {
+    if (empty($data[$field])) {
+        echo json_encode(['success' => false, 'message' => "Missing field: $field"]);
+        exit;
+    }
+}
+if ($data['password'] !== $data['password_repeat']) {
+    echo json_encode(['success' => false, 'message' => 'Passwords do not match']);
+    exit;
+}
 
 require_once __DIR__ . '/../config/Database.php';
 use config\Database;
-
-// 1) Collect & basic validate
-$fields = [
-  'salutation','first_name','last_name','address',
-  'postal_code','city','email','username',
-  'password','password_repeat','payment_info'
-];
-foreach ($fields as $f) {
-  if (empty($_POST[$f])) {
-    echo json_encode(['success'=>false,'message'=>"Field {$f} is required."]);
-    exit;
-  }
-}
-
-// 2) Password match
-if ($_POST['password'] !== $_POST['password_repeat']) {
-    echo json_encode(['success'=>false,'message'=>'Passwords do not match.']);
-    exit;
-}
-
-// 3) Unique check
 $db = (new Database())->getConnection();
-$stmt = $db->prepare("
-  SELECT id FROM users
-   WHERE username = ? OR email = ?
-");
-$stmt->bind_param("ss", $_POST['username'], $_POST['email']);
-$stmt->execute();
-$stmt->store_result();
-if ($stmt->num_rows > 0) {
-    echo json_encode(['success'=>false,'message'=>'Username or email already in use.']);
-    exit;
-}
-$stmt->close();
 
-// 4) Hash password & insert
-$hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$hashed = password_hash($data['password'], PASSWORD_DEFAULT);
+
+// Insert user
 $stmt = $db->prepare("
-  INSERT INTO users
-    (salutation, first_name, last_name,
-     address, postal_code, city,
-     email, username, password_hash,
-     payment_info, active, is_admin, created_at)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, NOW())
+    INSERT INTO users 
+    (salutation, first_name, last_name, address, postal_code, city, email, username, password_hash)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 ");
 $stmt->bind_param(
-  "ssssssssss",
-  $_POST['salutation'],
-  $_POST['first_name'],
-  $_POST['last_name'],
-  $_POST['address'],
-  $_POST['postal_code'],
-  $_POST['city'],
-  $_POST['email'],
-  $_POST['username'],
-  $hash,
-  $_POST['payment_info']
+    'sssssssss',
+    $data['salutation'],
+    $data['first_name'],
+    $data['last_name'],
+    $data['address'],
+    $data['postal_code'],
+    $data['city'],
+    $data['email'],
+    $data['username'],
+    $hashed
 );
-$ok = $stmt->execute();
-$stmt->close();
 
-echo json_encode(['success'=>(bool)$ok]);
-exit;
+if ($stmt->execute()) {
+    echo json_encode(['success' => true]);
+} else {
+    echo json_encode(['success' => false, 'message' => 'Registration failed: ' . $stmt->error]);
+}
+$stmt->close();
+$db->close();
+?>

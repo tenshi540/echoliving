@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${p.description}</td>
           <td>${p.rating}</td>
           <td>€${parseFloat(p.price).toFixed(2)}</td>
-          <td><img src="/echoliving/frontend/res/img/${p.image_filename}" alt="${p.name}" style="max-width:50px;"/></td>
+          <td>${p.image_filename ? `<img src="/echoliving/frontend/res/img/${p.image_filename}" alt="${p.name}" style="max-width:50px;"/>` : ''}</td>
           <td>${p.category}</td>
           <td>${p.created_at}</td>
           <td>
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 2) Hook up delete using existing deleteProduct.php
+  // 2) Hook up delete using JSON
   prodEl.addEventListener('click', async e => {
     if (!e.target.matches('.delete-btn')) return;
     const row = e.target.closest('tr');
@@ -58,12 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!confirm(`Are you sure you want to delete product #${id}?`)) return;
 
     try {
-      const form = new FormData();
-      form.append('id', id);
-
       const res = await fetch('/echoliving/backend/logic/deleteProduct.php', {
         method: 'POST',
-        body: form
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
       });
       const json = await res.json();
 
@@ -77,17 +75,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 3) Render the existing create-product form
+  // 3) Render the existing create-product form (no image upload)
   function renderCreateForm() {
     createEl.innerHTML = `
-      <form id="create-form" enctype="multipart/form-data" style="display:grid; gap:1rem; max-width:500px;">
+      <form id="create-form" style="display:grid; gap:1rem; max-width:500px;">
         <input type="text" name="name" placeholder="Name" required style="padding:0.5rem;">
         <textarea name="description" placeholder="Description" rows="3" required style="padding:0.5rem;"></textarea>
         <div style="display:flex; gap:1rem;">
           <input type="number" step="0.01" name="price" placeholder="Price (€)" required style="flex:1; padding:0.5rem;">
           <input type="number" step="0.1" min="0" max="5" name="rating" placeholder="Rating" required style="flex:1; padding:0.5rem;">
         </div>
-        <input type="file" name="image" accept="image/*" required>
+        <input type="text" name="category" placeholder="Category" required style="padding:0.5rem;">
         <button type="submit" class="btn-primary">Create Product</button>
         <p id="create-feedback" style="margin-top:0.5rem;"></p>
       </form>
@@ -96,19 +94,32 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('create-form').addEventListener('submit', async e => {
       e.preventDefault();
       const feedback = document.getElementById('create-feedback');
-      const fd = new FormData(e.target);
+      const formData = new FormData(e.target);
+
+      // Convert form data to plain JS object
+      const data = {};
+      for (const [key, value] of formData.entries()) {
+        data[key] = value;
+      }
 
       try {
         const res = await fetch('/echoliving/backend/logic/createProduct.php', {
           method: 'POST',
-          body: fd
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
         });
         if (!res.ok) throw new Error(res.statusText);
 
-        feedback.style.color = 'green';
-        feedback.textContent = 'Product created.';
-        e.target.reset();
-        await loadProducts();
+        const result = await res.json();
+        if (result.success) {
+          feedback.style.color = 'green';
+          feedback.textContent = 'Product created.';
+          e.target.reset();
+          await loadProducts();
+        } else {
+          feedback.style.color = 'red';
+          feedback.textContent = 'Error: ' + (result.message || 'Unknown error');
+        }
       } catch (err) {
         feedback.style.color = 'red';
         feedback.textContent = `Error: ${err.message}`;

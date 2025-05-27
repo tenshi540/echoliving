@@ -1,32 +1,37 @@
 <?php
-// deleteOrderItem.php
-header('Content-Type: application/json; charset=UTF-8');
-session_start();
-require_once __DIR__ . '/../config/Database.php';
+header('Content-Type: application/json');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 use config\Database;
 
-// 1) Admin check
-if (empty($_SESSION['user_id']) || empty($_SESSION['is_admin'])) {
-    http_response_code(403);
-    echo json_encode(['success'=>false,'message'=>'Forbidden']);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
     exit;
 }
 
-// 2) Get & validate item_id
-$itemId = $_POST['item_id'] ?? '';
-if (!ctype_digit((string)$itemId)) {
-    echo json_encode(['success'=>false,'message'=>'Invalid item ID']);
+$data = json_decode(file_get_contents('php://input'), true);
+
+if (!isset($data['item_id']) || !is_numeric($data['item_id'])) {
+    echo json_encode(['success' => false, 'message' => 'Missing or invalid item_id']);
     exit;
 }
-$itemId = (int)$itemId;
 
-// 3) Delete it
+$item_id = intval($data['item_id']);
+require_once __DIR__ . '/../config/Database.php';
 $db = (new Database())->getConnection();
-$stmt = $db->prepare("DELETE FROM order_items WHERE id = ?");
-$stmt->bind_param('i', $itemId);
-$ok = $stmt->execute();
-$stmt->close();
 
-// 4) JSON only
-echo json_encode(['success'=>(bool)$ok]);
-exit;
+$stmt = $db->prepare("DELETE FROM order_items WHERE id = ?");
+$stmt->bind_param('i', $item_id);
+
+if ($stmt->execute()) {
+    echo json_encode(['success' => true]);
+} else {
+    echo json_encode(['success' => false, 'message' => 'Failed to delete item']);
+}
+
+$stmt->close();
+$db->close();
+?>

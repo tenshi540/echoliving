@@ -10,8 +10,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    const res = await fetch(`/echoliving/backend/logic/fetchOrderDetails.php?orderId=${orderId}`, {
-      credentials: 'include'
+    // STRICT JSON: send POST with JSON body (no query param)
+    const res = await fetch('/echoliving/backend/logic/fetchOrderDetails.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ orderId: orderId })
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
