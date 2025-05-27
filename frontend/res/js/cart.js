@@ -79,6 +79,6 @@ function removeItem(id) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  updateCartCount();  // **this line fixes the missing badge on cart.php**
+  updateCartCount();  // this line fixes the missing badge on cart.php
   loadCart();
 });

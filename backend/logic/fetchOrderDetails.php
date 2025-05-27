@@ -13,7 +13,6 @@ if ($orderId <= 0) {
     exit;
 }
 
-// (Assuming you have something like this)
 require_once __DIR__ . '/../config/Database.php';
 use config\Database;
 $db = (new Database())->getConnection();

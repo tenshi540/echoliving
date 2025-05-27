@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $data = json_decode(file_get_contents('php://input'), true);
 $q = isset($data['q']) ? trim($data['q']) : '';
 
-// Basic validation (optional)
+// Basic validation
 if ($q === '') {
     echo json_encode([]);
     exit;

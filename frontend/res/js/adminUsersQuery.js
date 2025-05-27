@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const row = e.target.closest('tr');
     const id = row?.dataset.id;
 
-    // Activate/Deactivate (unchanged)
+    // Activate/Deactivate
     if (e.target.matches('.toggle-btn')) {
       const action = e.target.textContent.toLowerCase();
       if (!confirm(`${action} user #${id}?`)) return;

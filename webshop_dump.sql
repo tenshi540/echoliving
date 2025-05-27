@@ -33,7 +33,7 @@ CREATE TABLE `order_items` (
   KEY `product_id` (`product_id`),
   CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `order_items` (
 
 LOCK TABLES `order_items` WRITE;
 /*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
-INSERT INTO `order_items` VALUES (1,1,1,3,199.99),(2,1,2,4,149.99),(8,6,3,7,249.99),(12,8,3,1,249.99),(13,9,3,1,249.99),(16,10,9,1,59.99),(17,10,20,1,249.99),(18,11,7,1,129.99),(19,12,1,1,199.99),(20,12,2,1,149.99),(21,13,3,2,249.99),(22,13,8,1,49.99),(23,14,1,3,199.99),(24,14,3,3,249.99),(25,15,1,6,199.99),(26,15,2,1,149.99),(27,16,3,3,249.99),(29,18,3,1,249.99),(30,19,2,5,149.99);
+INSERT INTO `order_items` VALUES (1,1,1,3,199.99),(2,1,2,4,149.99),(8,6,3,7,249.99),(12,8,3,1,249.99),(13,9,3,1,249.99),(16,10,9,1,59.99),(17,10,20,1,249.99),(18,11,7,1,129.99),(20,12,2,1,149.99),(21,13,3,2,249.99),(22,13,8,1,49.99),(24,14,3,3,249.99),(25,15,1,6,199.99),(26,15,2,1,149.99),(27,16,3,3,249.99),(29,18,3,1,249.99),(30,19,2,5,149.99),(31,20,1,3,199.99),(32,21,1,2,199.99),(33,21,4,1,129.99),(34,22,25,1,299.99),(35,23,25,1,299.99),(36,24,25,2,299.99),(37,25,22,1,39.99);
 /*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,2,1199.93,'N/A','2025-05-11 16:12:40'),(2,2,179.99,'N/A','2025-05-11 16:46:08'),(3,2,179.99,'N/A','2025-05-11 18:24:20'),(4,2,149.99,'N/A','2025-05-11 18:24:32'),(5,2,129.99,'N/A','2025-05-11 18:36:47'),(6,2,1749.93,'N/A','2025-05-11 18:40:24'),(7,2,649.97,'N/A','2025-05-11 20:15:32'),(8,3,399.98,'N/A','2025-05-11 20:22:12'),(9,5,449.98,'N/A','2025-05-12 12:27:34'),(10,6,309.98,'N/A','2025-05-26 18:04:32'),(11,6,129.99,'N/A','2025-05-26 18:06:19'),(12,7,349.98,'N/A','2025-05-27 00:14:26'),(13,7,549.97,'N/A','2025-05-27 00:14:32'),(14,5,1349.94,'N/A','2025-05-27 00:39:27'),(15,5,1349.93,'N/A','2025-05-27 02:45:54'),(16,5,749.97,'N/A','2025-05-27 02:48:55'),(17,5,99.67,'N/A','2025-05-27 02:52:56'),(18,5,249.99,'N/A','2025-05-27 02:58:24'),(19,5,749.95,'N/A','2025-05-27 02:58:35');
+INSERT INTO `orders` VALUES (1,2,1199.93,'N/A','2025-05-11 16:12:40'),(2,2,179.99,'N/A','2025-05-11 16:46:08'),(3,2,179.99,'N/A','2025-05-11 18:24:20'),(4,2,149.99,'N/A','2025-05-11 18:24:32'),(5,2,129.99,'N/A','2025-05-11 18:36:47'),(6,2,1749.93,'N/A','2025-05-11 18:40:24'),(7,2,649.97,'N/A','2025-05-11 20:15:32'),(8,3,399.98,'N/A','2025-05-11 20:22:12'),(9,5,449.98,'N/A','2025-05-12 12:27:34'),(10,6,309.98,'N/A','2025-05-26 18:04:32'),(11,6,129.99,'N/A','2025-05-26 18:06:19'),(12,7,349.98,'N/A','2025-05-27 00:14:26'),(13,7,549.97,'N/A','2025-05-27 00:14:32'),(14,5,1349.94,'N/A','2025-05-27 00:39:27'),(15,5,1349.93,'N/A','2025-05-27 02:45:54'),(16,5,749.97,'N/A','2025-05-27 02:48:55'),(17,5,99.67,'N/A','2025-05-27 02:52:56'),(18,5,249.99,'N/A','2025-05-27 02:58:24'),(19,5,749.95,'N/A','2025-05-27 02:58:35'),(20,5,599.97,'N/A','2025-05-27 13:07:00'),(21,5,529.97,'N/A','2025-05-27 15:53:00'),(22,5,299.99,'N/A','2025-05-27 15:56:54'),(23,5,299.99,'N/A','2025-05-27 16:05:46'),(24,9,599.98,'N/A','2025-05-27 16:25:06'),(25,5,39.99,'N/A','2025-05-27 16:25:44'),(26,5,599.98,'N/A','2025-05-27 16:30:00');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ CREATE TABLE `products` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `category` varchar(50) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'uncategorized',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +139,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Mr','d','d','d','1','d','f@m.com','wd','$2y$10$g6w1FHCC1vKyrhrQa0cg9OqqlLY/BrB35p2vbVTgmB3hYv5tjzTkq','d',0,0,'2025-05-11 14:42:11'),(2,'Mr','w','w','w','1','w','w@w.com','w','$2y$10$xkiuRNQHyT/rpbUSTGfCkerJWV7VkpH8YSrUM2o7D896KoxbGX6k2','w',0,0,'2025-05-11 14:53:34'),(3,'Ms','s','s','d','1','d','s@d.com','s','$2y$10$LQcBJj.c.abSysh7VpMB4eaYHvB65rcs93XH3ENoCFgS/T77WOoZ6','s',0,1,'2025-05-11 20:21:45'),(4,'Ms.','Jane','Doe',NULL,NULL,NULL,'jane.doe@example.com','janedoe','6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',NULL,1,1,'2025-05-12 11:09:56'),(5,'Mr.','1','1','1','1','england','a@a.com','1','$2y$10$8PHCduE93nKoF4XdUWSm9u3Oq9AyvoHh1Goids.2DLhpsDLUAXxH.','1',1,1,'2025-05-12 11:12:46'),(6,'Mx','Juan','Deporto','w','1','1','juan@juan.juan','juan','$2y$10$iyfeCLrEva9Nej.Zr/c8VeNKobZmaIh1zE9vv7baMIXNoxKEmk0ba','j',0,0,'2025-05-26 18:03:57'),(7,'Mr.','1','1','1yi','1','1234','i@i.at','ia','$2y$10$QwiCJVSi/UlXXe4ZHbC1buWEEsTm5D8/hKGTbxweVYvmcBjZ8JRli','1',0,1,'2025-05-26 23:56:37'),(8,'Mr.','prr prr','patapim','1','1','1334','d23232@gmail.com','pr','$2y$10$pHB8bg8x1glm648HV/Z.Oudkwxxw74.HRHLI0CoEoODHc4GwOUCoe','tung',0,0,'2025-05-27 02:22:11');
+INSERT INTO `users` VALUES (1,'Mr','d','d','d','1','d','f@m.com','wd','$2y$10$g6w1FHCC1vKyrhrQa0cg9OqqlLY/BrB35p2vbVTgmB3hYv5tjzTkq','d',0,0,'2025-05-11 14:42:11'),(2,'Mr','w','w','w','1','w','w@w.com','w','$2y$10$xkiuRNQHyT/rpbUSTGfCkerJWV7VkpH8YSrUM2o7D896KoxbGX6k2','w',0,0,'2025-05-11 14:53:34'),(3,'Ms','s','s','d','1','d','s@d.com','s','$2y$10$LQcBJj.c.abSysh7VpMB4eaYHvB65rcs93XH3ENoCFgS/T77WOoZ6','s',0,1,'2025-05-11 20:21:45'),(4,'Ms.','Jane','Doe',NULL,NULL,NULL,'jane.doe@example.com','janedoe','6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',NULL,1,1,'2025-05-12 11:09:56'),(5,'Mr.','1','1CHECK','12','1','england','a@a.com','1','$2y$10$8PHCduE93nKoF4XdUWSm9u3Oq9AyvoHh1Goids.2DLhpsDLUAXxH.','1',1,1,'2025-05-12 11:12:46'),(6,'Mx','Juan','Deporto','w','1','1','juan@juan.juan','juan','$2y$10$iyfeCLrEva9Nej.Zr/c8VeNKobZmaIh1zE9vv7baMIXNoxKEmk0ba','j',0,0,'2025-05-26 18:03:57'),(7,'Mr.','1','1','1yi','1','1234','i@i.at','ia','$2y$10$QwiCJVSi/UlXXe4ZHbC1buWEEsTm5D8/hKGTbxweVYvmcBjZ8JRli','1',0,1,'2025-05-26 23:56:37'),(8,'Mr.','prr prr','patapim','1','1','1334','d23232@gmail.com','pr','$2y$10$pHB8bg8x1glm648HV/Z.Oudkwxxw74.HRHLI0CoEoODHc4GwOUCoe','tung',0,0,'2025-05-27 02:22:11'),(9,'Mr.','tung','sahur','1','16','1','1@tung.com','sahur','$2y$10$SbwOxCnJk1AeGashlT1vdugkLEZjfkaLqb3.a/H1cSmxlY0t8AJuS',NULL,0,0,'2025-05-27 16:24:35');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,4 +180,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-27  5:07:15
+-- Dump completed on 2025-05-27 18:42:58

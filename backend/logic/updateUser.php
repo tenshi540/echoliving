@@ -1,5 +1,5 @@
 <?php
-// backend/logic/updateUser.php
+// updateUser.php
 
 // 1) Always return JSON, suppress HTML errors
 header('Content-Type: application/json; charset=UTF-8');

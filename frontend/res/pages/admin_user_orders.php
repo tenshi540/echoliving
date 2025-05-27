@@ -33,7 +33,6 @@ if (!ctype_digit($userId)) {
 
   <?php include __DIR__ . '/../../omega.php'; ?>
 
-  <!-- load the adjusted JS file -->
   <script src="../js/adminUserOrdersQuery.js" defer></script>
 </body>
 </html>

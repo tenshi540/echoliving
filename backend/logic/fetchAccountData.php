@@ -3,7 +3,7 @@
 header('Content-Type: application/json; charset=UTF-8');
 
 session_start();
-// no “remember me” cookie logic needed any more
+
 require_once __DIR__ . '/../config/Database.php';
 use config\Database;
 

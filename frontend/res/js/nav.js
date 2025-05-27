@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   container.innerHTML = html;
 
-  // 3) Kick off cart count update if you have that function
+  // 3) Kick off cart count update
   if (typeof updateCartCount === 'function') {
     updateCartCount();
   }
