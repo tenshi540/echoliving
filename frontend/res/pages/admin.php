@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if (empty($_SESSION['user_id']) || empty($_SESSION['is_admin'])) {
     header('Location: /echoliving/frontend/res/pages/login.php');

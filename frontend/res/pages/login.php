@@ -1,82 +1,41 @@
 <?php
+// login.php
 session_start();
-require_once __DIR__ . '/../../../backend/config/Database.php';
-use Config\Database;
-
-$error = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $db   = Database::getConnection();
-    $user = trim($_POST['user']);
-    $pass = $_POST['password'];
-
-    // fetch by username or email
-    $stmt = $db->prepare("
-      SELECT id, password_hash, active, is_admin
-        FROM users
-       WHERE username = ? OR email = ?
-      LIMIT 1
-    ");
-    $stmt->bind_param("ss", $user, $user);
-    $stmt->execute();
-    $stmt->store_result();
-
-    if ($stmt->num_rows === 1) {
-        $stmt->bind_result($id, $hash, $active, $is_admin);
-        $stmt->fetch();
-
-        if (!$active) {
-            $error = 'Your account is deactivated.';
-        } elseif (password_verify($pass, $hash)) {
-            // success → set session and redirect
-            $_SESSION['user_id']   = $id;
-            $_SESSION['is_admin']  = $is_admin;
-            $stmt->close();
-            $db->close();
-            header('Location: /echoliving/frontend/index.php');
-            exit;
-        } else {
-            $error = 'Invalid username or password.';
-        }
-    } else {
-        $error = 'Invalid username or password.';
-    }
-    $stmt->close();
-    $db->close();
+if (!empty($_SESSION['user_id'])) {
+    header("Location:/echoliving/frontend/index.php");
+    exit;
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Login – EchoLiving</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Login | EchoLiving</title>
   <link rel="stylesheet" href="../css/prisma.css">
 </head>
 <body>
-  <?php include('../../compass.php'); ?>
+  <?php include __DIR__ . '/../../compass.php'; ?>
 
-  <div class="auth-container">
-    <div class="auth-card">
-      <h2 class="auth-title">Login to Your Account</h2>
-
-      <?php if ($error): ?>
-        <script>alert("<?= addslashes($error) ?>");</script>
-      <?php endif; ?>
-
-      <form id="login-form" method="post">
-        <input type="text" name="user" placeholder="Username or Email" class="auth-input" required>
-        <input type="password" name="password" placeholder="Password" class="auth-input" required>
-        <button type="submit" class="auth-button">Login</button>
-      </form>
-
-      <div class="auth-footer">
-        Don’t have an account?
-        <a href="/echoliving/frontend/res/pages/register.php">Register</a>
+  <main class="login-box">
+    <h2 class="login-title">Login to Your Account</h2>
+    <form id="login-form" class="login-form">
+      <div class="form-group">
+        <label>Username or Email</label>
+        <input type="text" name="username" required placeholder="Username or Email">
       </div>
-    </div>
-  </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" required placeholder="Password">
+      </div>
+      <button type="submit" class="btn-primary">Login</button>
+    </form>
+    <p class="login-footer">
+      Don’t have an account? <a href="register.php">Register</a>
+    </p>
+  </main>
 
-  <?php include('../../omega.php'); ?>
+  <?php include __DIR__ . '/../../omega.php'; ?>
+  <script src="../js/users.js" defer></script>
 </body>
 </html>

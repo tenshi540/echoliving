@@ -1,12 +1,13 @@
 <?php
+// Start or resume the session
 session_start();
-// Clear all session data
-$_SESSION = [];
+
+// Unset all session variables
+session_unset();
+
+// Destroy the session
 session_destroy();
 
-// Clear the “remember me” cookie (if used)
-setcookie('remember_me', '', time() - 3600, '/echoliving');
-
-// Redirect back to login (or home)  
+// Redirect back to the login page (adjust path as needed)
 header('Location: /echoliving/frontend/res/pages/login.php');
 exit;

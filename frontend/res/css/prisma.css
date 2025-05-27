@@ -872,3 +872,82 @@ nav .nav-right a.active {
   text-decoration: none;
 }
 .button:hover { background: #062841; }
+
+/* =============================
+   Login / Auth Page Overrides
+   ============================= */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  padding: 100px 0;              /* vert centering */
+}
+.auth-card {
+  background: #fff;
+  max-width: 380px;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.auth-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+.auth-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f9f9f9;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+.auth-button {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: #dceefd;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 1rem;
+}
+.auth-button:hover {
+  background-color: #c5e1f5;
+}
+.auth-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+.auth-footer a {
+  color: #6b5af3;
+  text-decoration: none;
+}
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ───── Imprint Page Styles ───── */
+.page-content {
+  max-width: 800px;
+  margin: 80px auto 40px;    /* space for fixed header/footer */
+  padding: 0 1rem;
+  line-height: 1.6;
+}
+.imprint h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #0d3b66;
+}
+.imprint p {
+  margin-bottom: 1rem;
+}
+.imprint strong {
+  color: #0d3b66;
+}

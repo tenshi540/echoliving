@@ -1,62 +1,45 @@
 <?php
+// admin_products.php
 session_start();
+// simple session-only init
 if (empty($_SESSION['user_id']) || empty($_SESSION['is_admin'])) {
-    header('Location: login.php');
+    header("Location:/echoliving/frontend/res/pages/login.php");
     exit;
 }
-
-require_once __DIR__ . '/../../../backend/config/Database.php';
-use Config\Database;
-
-$db     = Database::getConnection();
-$result = $db->query("
-  SELECT id, name, description, price
-    FROM products
-   ORDER BY id
-");
-// ← note: no $db->close() here
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Admin – Products</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Admin – Products | EchoLiving</title>
   <link rel="stylesheet" href="../css/prisma.css">
 </head>
 <body>
-  <?php include('../../compass.php'); ?>
+  <?php include __DIR__ . '/../../compass.php'; ?>
 
-  <main class="admin-container">
-    <h1>Product Management</h1>
-    <table class="admin-table">
-      <thead>
-        <tr>
-          <th>ID</th><th>Name</th><th>Description</th><th>Price</th><th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php while ($p = $result->fetch_assoc()): ?>
-          <tr>
-            <td><?= htmlspecialchars($p['id'],   ENT_QUOTES,'UTF-8') ?></td>
-            <td><?= htmlspecialchars($p['name'], ENT_QUOTES,'UTF-8') ?></td>
-            <td><?= htmlspecialchars($p['description'], ENT_QUOTES,'UTF-8') ?></td>
-            <td><?= htmlspecialchars($p['price'], ENT_QUOTES,'UTF-8') ?> €</td>
-            <td>
-              <a
-                href="/echoliving/backend/logic/deleteProduct.php?id=<?= htmlspecialchars($p['id'], ENT_QUOTES,'UTF-8') ?>"
-                onclick="return confirm('Really delete this product?');"
-                class="btn btn-danger"
-              >
-                Delete
-              </a>
-            </td>
-          </tr>
-        <?php endwhile; ?>
-      </tbody>
-    </table>
+  <main style="max-width:1000px; margin:100px auto; padding:1rem;">
+    <h1>Manage Products</h1>
+
+    <!-- Products List -->
+    <section>
+      <h2>Existing Products</h2>
+      <div id="products-container">
+        <!-- Filled in by JS -->
+      </div>
+    </section>
+
+    <!-- New Product Form -->
+    <section style="margin-top:2rem;">
+      <h2>Add New Product</h2>
+      <div id="create-container">
+        <!-- Filled in by JS -->
+      </div>
+    </section>
   </main>
 
-  <?php include('../../omega.php'); ?>
+  <?php include __DIR__ . '/../../omega.php'; ?>
+
+  <script src="../js/adminProductsQuery.js" defer></script>
 </body>
 </html>

@@ -1,71 +1,32 @@
 <?php
+// deleteOrderItem.php
+header('Content-Type: application/json; charset=UTF-8');
 session_start();
+require_once __DIR__ . '/../config/Database.php';
+use config\Database;
+
+// 1) Admin check
 if (empty($_SESSION['user_id']) || empty($_SESSION['is_admin'])) {
-    header('HTTP/1.1 403 Forbidden');
+    http_response_code(403);
+    echo json_encode(['success'=>false,'message'=>'Forbidden']);
     exit;
 }
 
-require_once __DIR__ . '/../config/Database.php';
-use Config\Database;
-$db = Database::getConnection();
-
-$itemId = isset($_GET['item_id']) && ctype_digit($_GET['item_id'])
-        ? (int)$_GET['item_id']
-        : null;
-$userId = isset($_GET['user_id']) && ctype_digit($_GET['user_id'])
-        ? (int)$_GET['user_id']
-        : null;
-
-if ($itemId) {
-    // 1) find its order
-    $stmt = $db->prepare("
-      SELECT order_id 
-        FROM order_items 
-       WHERE id = ?
-    ");
-    $stmt->bind_param("i", $itemId);
-    $stmt->execute();
-    $stmt->bind_result($orderId);
-    $stmt->fetch();
-    $stmt->close();
-
-    // 2) delete the item
-    $stmt = $db->prepare("
-      DELETE FROM order_items 
-       WHERE id = ?
-    ");
-    $stmt->bind_param("i", $itemId);
-    $stmt->execute();
-    $stmt->close();
-
-    // 3) recalc new total
-    $stmt = $db->prepare("
-      SELECT COALESCE(SUM(quantity * price_per_item), 0) 
-        FROM order_items 
-       WHERE order_id = ?
-    ");
-    $stmt->bind_param("i", $orderId);
-    $stmt->execute();
-    $stmt->bind_result($newTotal);
-    $stmt->fetch();
-    $stmt->close();
-
-    // 4) update orders table
-    $stmt = $db->prepare("
-      UPDATE orders 
-         SET total_price = ?
-       WHERE id = ?
-    ");
-    $stmt->bind_param("di", $newTotal, $orderId);
-    $stmt->execute();
-    $stmt->close();
+// 2) Get & validate item_id
+$itemId = $_POST['item_id'] ?? '';
+if (!ctype_digit((string)$itemId)) {
+    echo json_encode(['success'=>false,'message'=>'Invalid item ID']);
+    exit;
 }
+$itemId = (int)$itemId;
 
-$db->close();
+// 3) Delete it
+$db = (new Database())->getConnection();
+$stmt = $db->prepare("DELETE FROM order_items WHERE id = ?");
+$stmt->bind_param('i', $itemId);
+$ok = $stmt->execute();
+$stmt->close();
 
-// go back to this user’s order overview
-header(
-  'Location: /echoliving/frontend/res/pages/admin_user_orders.php'
-  . '?user_id=' . $userId
-);
+// 4) JSON only
+echo json_encode(['success'=>(bool)$ok]);
 exit;
