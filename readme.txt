@@ -24,4 +24,4 @@ A PHP-based webshop created for a university assignment. The application simulat
 3. Start Laragon and run `localhost` in your browser.
 4. Import the included SQL dump (`webshop_dump.sql`) into your MySQL server.
 
-> ⚠️ This project is intended for local development/testing only. All user and order data is fictional and used for demo purposes.
+> This project is intended for local development/testing only. All user and order data is fictional and used for demo purposes.
